@@ -1,13 +1,13 @@
 use yew::prelude::*; 
 
+mod pages;
+
 #[function_component(App)]
-fn app() -> Html {
+pub fn app() -> Html {
     html! {
-        <div> 
-            <p> {"Test"} </p>
-        </div>
+        < pages::login::Login />
     }
-} 
+}
 
 fn main() {
     yew::Renderer::<App>::new().render();
