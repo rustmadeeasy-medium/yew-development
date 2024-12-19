@@ -1,20 +1,32 @@
 use yew::prelude::*;
 
+use crate::components::input::Input;
+
 #[function_component(Login)]
 pub fn login() -> Html {
     html! {
         <div class = "container">
-            <div class = "row min-vh-100 justify-content-center align">
+            <div class = "row min-vh-100 justify-content-center align-items-center">
                 <div class = "col-md-4">
                     <form>
-                        <label> {"Username"} </label>
-                        <input type = "text" />
-                        <label> {"Password"} </label>
-                        <input type = "text" />
+                        <div class = "col-md-4">
+                            <Input 
+                                input_type = "text" 
+                                name = "username" 
+                                label = "Username"
+                            />
+                        </div>
+                        <div class = "mb3">
+                            <Input 
+                                input_type = "password" 
+                                name = "password" 
+                                label = "Password"
+                            />
+                        </div>
                         <button type = "submit"> {"Login"} </button>
                     </form>
                 </div>
             </div>
         </div>
     }
-} 
+}
