@@ -6,15 +6,23 @@ use crate::components::test::*;
 
 #[function_component(LoginForm)]
 pub fn login_form() -> Html {
-    // State to manage whether the <Test /> component should be displayed
+    // State to manage whether the <Test /> component is visible
     let show_test = use_state(|| false);
 
-    // Handle button click
+    // Handle showing the <Test /> component
     let handle_click = {
         let show_test = show_test.clone();
         Callback::from(move |_| {
             log!("I clicked!");
-            show_test.set(true); // Update the state to show the <Test /> component
+            show_test.set(true);
+        })
+    };
+
+    // Handle hiding the <Test /> component (triggered by the child component)
+    let hide_test = {
+        let show_test = show_test.clone();
+        Callback::from(move |_| {
+            show_test.set(false);
         })
     };
 
@@ -43,7 +51,7 @@ pub fn login_form() -> Html {
 
             // Conditionally render the <Test /> component if `show_test` is true
             if *show_test {
-                <Test />
+                <Test on_close={hide_test} />
             }
         </form>
     }
