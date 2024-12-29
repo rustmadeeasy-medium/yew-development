@@ -1,6 +1,6 @@
 use yew::prelude::*;
 
-use crate::components::input::Input;
+use crate::components::login_form::LoginForm;
 
 #[function_component(Login)]
 pub fn login() -> Html {
@@ -8,23 +8,11 @@ pub fn login() -> Html {
         <div class = "container">
             <div class = "row min-vh-100 justify-content-center align-items-center">
                 <div class = "col-md-4">
-                    <form>
-                        <div class = "col-md-4">
-                            <Input 
-                                input_type = "text" 
-                                name = "username" 
-                                label = "Username"
-                            />
-                        </div>
-                        <div class = "mb3">
-                            <Input 
-                                input_type = "password" 
-                                name = "password" 
-                                label = "Password"
-                            />
-                        </div>
-                        <button type = "submit"> {"Login"} </button>
-                    </form>
+               
+                    <div class = "col-md-4">
+                        <LoginForm />
+                    </div>
+            
                 </div>
             </div>
         </div>

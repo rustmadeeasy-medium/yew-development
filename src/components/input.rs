@@ -9,9 +9,10 @@ pub struct Props {
 
 #[function_component(Input)]
 pub fn input(props : &Props) -> Html {
+    let html_id = format!("edit-{}", props.name);
     html! {
         <div>
-            <label> {props.label.clone()} </label>
+            <label id = {html_id.clone()}> {props.label.clone()} </label>
             <input 
                 type = {props.input_type.clone()} 
                 name = {props.name.clone()}    
