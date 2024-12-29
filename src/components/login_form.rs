@@ -1,11 +1,21 @@
 use yew::prelude::*;
+use gloo_console::log;
+
 
 use crate::components::input::*;
+
+fn handleclick() {
+    log!("I clicked !")
+}
 
 #[function_component(LoginForm)]  
 pub fn login_form() -> Html {
     let onsubmit = Callback::from(|e : SubmitEvent | {
         e.prevent_default(); 
+    });
+
+    let onclick = Callback::from(|MouseEvent| {
+        handleclick();
     });
 
     html! {
@@ -23,7 +33,7 @@ pub fn login_form() -> Html {
                         label = "Password"
                     />
                 </div>
-                <button type = "submit"> {"Login"} </button>
+                <button onclick = {onclick} type = "submit"> {"Login"} </button>
             </div>
         </form>
     }

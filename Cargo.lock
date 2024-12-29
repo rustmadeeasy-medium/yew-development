@@ -91,6 +91,7 @@ dependencies = [
 name = "course-rust-front-end"
 version = "0.1.0"
 dependencies = [
+ "gloo-console 0.3.0",
  "yew",
 ]
 
