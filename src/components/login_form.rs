@@ -1,41 +1,50 @@
 use yew::prelude::*;
 use gloo_console::log;
 
-
 use crate::components::input::*;
+use crate::components::test::*;
 
-fn handleclick() {
-    log!("I clicked !")
-}
-
-#[function_component(LoginForm)]  
+#[function_component(LoginForm)]
 pub fn login_form() -> Html {
-    let onsubmit = Callback::from(|e : SubmitEvent | {
-        e.prevent_default(); 
-    });
+    // State to manage whether the <Test /> component should be displayed
+    let show_test = use_state(|| false);
 
-    let onclick = Callback::from(|MouseEvent| {
-        handleclick();
+    // Handle button click
+    let handle_click = {
+        let show_test = show_test.clone();
+        Callback::from(move |_| {
+            log!("I clicked!");
+            show_test.set(true); // Update the state to show the <Test /> component
+        })
+    };
+
+    // Handle form submission
+    let onsubmit = Callback::from(|e: SubmitEvent| {
+        e.prevent_default(); // Prevent the default form submission
     });
 
     html! {
-        <form onsubmit = {onsubmit}>
-            <div class = "mb-3">
-                <Input 
-                    input_type = "text" 
-                    name = "username" 
-                    label = "Username"
+        <form {onsubmit}>
+            <div class="mb-3">
+                <Input
+                    input_type="text"
+                    name="username"
+                    label="Username"
                 />
-                <div class = "mb-3">
-                    <Input 
-                        input_type = "password" 
-                        name = "password" 
-                        label = "Password"
+                <div class="mb-3">
+                    <Input
+                        input_type="password"
+                        name="password"
+                        label="Password"
                     />
                 </div>
-                <button onclick = {onclick} type = "submit"> {"Login"} </button>
+                <button onclick={handle_click} type="button">{"Login"}</button>
             </div>
+
+            // Conditionally render the <Test /> component if `show_test` is true
+            if *show_test {
+                <Test />
+            }
         </form>
     }
-}    
-                   
+}
